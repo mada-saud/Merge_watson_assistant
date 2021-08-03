@@ -1,0 +1,517 @@
+{
+  "intents": [
+    {
+      "intent": "Goodbye",
+      "examples": [
+        {
+          "text": "goodbye"
+        },
+        {
+          "text": "thank you"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Inquiry",
+      "examples": [
+        {
+          "text": "I want to Inquiry something"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Questions",
+      "examples": [
+        {
+          "text": "How were the buttons added?"
+        },
+        {
+          "text": "Is it possible to add a background image?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "welcome",
+      "examples": [
+        {
+          "text": "good afternoon"
+        },
+        {
+          "text": "good evening"
+        },
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "how are you"
+        },
+        {
+          "text": "welcome"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Goodbye",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "bye",
+          "synonyms": [
+            "goodbye"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Nice to meet you",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "thanks",
+          "synonyms": [
+            "thank you",
+            "thank you very much"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Inquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "How are the parts made?",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "How is the arm controlled?",
+          "synonyms": [
+            "How is it controlled?"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Questions",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "How was the number added next to the slider?",
+          "synonyms": [
+            "How do I add the number?"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "How were the buttons added?",
+          "synonyms": [
+            "Possible way to add buttons ?"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "welcome",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "good afternoon",
+            "good evening"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "hi",
+          "synonyms": [
+            "hello",
+            "hey"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "welcome",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_7_1627585880617",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Questions",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@Questions",
+      "dialog_node": "node_10_1627585409489",
+      "previous_sibling": "node_3_1627585372420"
+    },
+    {
+      "type": "standard",
+      "title": "Goodbye",
+      "output": {
+        "generic": []
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_7_1627585880617"
+      },
+      "conditions": "#Goodbye",
+      "dialog_node": "node_10_1627585858159",
+      "previous_sibling": "node_9_1627585726720"
+    },
+    {
+      "type": "standard",
+      "title": "welcome",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@welcome",
+      "dialog_node": "node_1_1627585223035",
+      "previous_sibling": "node_7_1627585200584"
+    },
+    {
+      "type": "standard",
+      "title": "Questions",
+      "output": {
+        "generic": []
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_10_1627585409489"
+      },
+      "conditions": "#Questions",
+      "dialog_node": "node_3_1627585372420",
+      "previous_sibling": "node_1_1627585223035"
+    },
+    {
+      "type": "standard",
+      "title": "welcome",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_1_1627585223035"
+      },
+      "conditions": "#welcome",
+      "dialog_node": "node_7_1627585200584",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "GoodBye",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@Goodbye",
+      "dialog_node": "node_7_1627585880617",
+      "previous_sibling": "node_10_1627585858159"
+    },
+    {
+      "type": "standard",
+      "title": "Inquiry",
+      "output": {
+        "generic": []
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_9_1627585726720"
+      },
+      "conditions": "#Inquiry",
+      "dialog_node": "node_8_1627585691923",
+      "previous_sibling": "node_10_1627585409489"
+    },
+    {
+      "type": "standard",
+      "title": "Inquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@Inquiry",
+      "dialog_node": "node_9_1627585726720",
+      "previous_sibling": "node_8_1627585691923"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "welcome"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1627585223035",
+      "conditions": "@welcome:welcome",
+      "dialog_node": "response_10_1627585281001",
+      "previous_sibling": "response_6_1627585253781"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "welcome"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1627585880617",
+      "conditions": "@Goodbye:thanks",
+      "dialog_node": "response_10_1627585921328",
+      "previous_sibling": "response_4_1627585904300"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Using the input tag "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_10_1627585409489",
+      "conditions": "@Questions:(How were the buttons added?)",
+      "dialog_node": "response_3_1627585437043"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "bye"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1627585880617",
+      "conditions": "@Goodbye:bye",
+      "dialog_node": "response_4_1627585904300"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Using a 3D printer"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_9_1627585726720",
+      "conditions": "@Inquiry:(How are the parts made?)",
+      "dialog_node": "response_5_1627585741624"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "hello"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1627585223035",
+      "conditions": "@welcome:hi",
+      "dialog_node": "response_6_1627585238524"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "hi"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1627585223035",
+      "conditions": "@welcome:(good morning)",
+      "dialog_node": "response_6_1627585253781",
+      "previous_sibling": "response_6_1627585238524"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "using the buttons"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1627585726720",
+      "conditions": "@Inquiry:(How is the arm controlled?)",
+      "dialog_node": "response_8_1627585785392",
+      "previous_sibling": "response_5_1627585741624"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "thank you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1627585880617",
+      "conditions": "@Goodbye:(Nice to meet you)",
+      "dialog_node": "response_8_1627585935057",
+      "previous_sibling": "response_10_1627585921328"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "First thing put the number using tag span and let the number move using JavaScript"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1627585409489",
+      "conditions": "@Questions:(How was the number added next to the slider?)",
+      "dialog_node": "response_9_1627585526240",
+      "previous_sibling": "response_3_1627585437043"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Talk",
+  "language": "en",
+  "description": ""
+}
